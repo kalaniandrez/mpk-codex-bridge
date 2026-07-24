@@ -7,9 +7,6 @@ final class BridgeModel: ObservableObject {
     @Published private(set) var sources: [MIDISourceDescriptor] = []
     @Published private(set) var lastMIDIMessage = "Waiting for MIDI…"
     @Published private(set) var lastAction = "No action yet"
-    @Published private(set) var lastTriggeredMappingID: UUID?
-    @Published private(set) var accessibilityTrusted: Bool
-    @Published private(set) var learningHint: String?
     @Published private(set) var errorMessage: String?
     @Published var learningMappingID: UUID?
     @Published var bridgeEnabled = true
@@ -30,7 +27,6 @@ final class BridgeModel: ObservableObject {
         self.store = store
         self.actionExecutor = actionExecutor
         configuration = store.load()
-        accessibilityTrusted = actionExecutor.isAccessibilityTrusted
 
         midiService.onSourcesChanged = { [weak self] sources in
             self?.handleSourcesChanged(sources)
@@ -42,7 +38,6 @@ final class BridgeModel: ObservableObject {
             self?.errorMessage = message
         }
 
-        try? store.save(configuration)
         handleSourcesChanged(midiService.availableSources())
     }
 
@@ -56,23 +51,7 @@ final class BridgeModel: ObservableObject {
     }
 
     var isAccessibilityTrusted: Bool {
-        accessibilityTrusted
-    }
-
-    var learnedMappingsCount: Int {
-        configuration.mappings.filter { $0.trigger != nil }.count
-    }
-
-    var setupCompletedSteps: Int {
-        [
-            selectedSourceID != nil,
-            accessibilityTrusted,
-            learnedMappingsCount > 0
-        ].filter { $0 }.count
-    }
-
-    var isReady: Bool {
-        setupCompletedSteps == 3 && bridgeEnabled
+        actionExecutor.isAccessibilityTrusted
     }
 
     func selectSource(_ sourceID: Int32?) {
@@ -83,22 +62,11 @@ final class BridgeModel: ObservableObject {
 
     func startLearning(_ mappingID: UUID) {
         learningMappingID = mappingID
-        if
-            let mapping = configuration.mappings.first(
-                where: { $0.id == mappingID }
-            ),
-            mapping.expectsContinuousInput
-        {
-            learningHint = "Turn a knob. Piano notes are ignored for this slot."
-        } else {
-            learningHint = "Press one pad or key."
-        }
         errorMessage = nil
     }
 
     func cancelLearning() {
         learningMappingID = nil
-        learningHint = nil
     }
 
     func clearTrigger(_ mappingID: UUID) {
@@ -130,7 +98,6 @@ final class BridgeModel: ObservableObject {
         configuration = .defaultConfiguration
         configuration.preferredSourceID = sourceID
         learningMappingID = nil
-        learningHint = nil
         persist()
     }
 
@@ -146,11 +113,6 @@ final class BridgeModel: ObservableObject {
 
     func requestAccessibilityAccess() {
         actionExecutor.requestAccessibilityAccess()
-        refreshAccessibilityStatus()
-    }
-
-    func refreshAccessibilityStatus() {
-        accessibilityTrusted = actionExecutor.isAccessibilityTrusted
     }
 
     func dismissError() {
@@ -185,30 +147,10 @@ final class BridgeModel: ObservableObject {
         lastMIDIMessage = message.summary
 
         if let learningMappingID, message.canBeLearned {
-            guard
-                let learningMapping = configuration.mappings.first(
-                    where: { $0.id == learningMappingID }
-                )
-            else {
-                self.learningMappingID = nil
-                learningHint = nil
-                return
-            }
-
-            if
-                learningMapping.expectsContinuousInput,
-                !message.kind.isContinuous
-            {
-                learningHint = "Ignored \(message.summary). Turn a knob to send MIDI CC."
-                lastAction = "Waiting for knob CC…"
-                return
-            }
-
             mutateMapping(learningMappingID) { mapping in
                 mapping.trigger = MIDITrigger(message: message)
             }
             self.learningMappingID = nil
-            learningHint = nil
             lastAction = "Learned \(message.summary)"
             return
         }
@@ -240,13 +182,11 @@ final class BridgeModel: ObservableObject {
     }
 
     private func run(_ activation: MappingActivation) {
-        lastTriggeredMappingID = activation.mappingID
         Task { [weak self] in
             guard let self else {
                 return
             }
             lastAction = await actionExecutor.perform(activation)
-            refreshAccessibilityStatus()
         }
     }
 

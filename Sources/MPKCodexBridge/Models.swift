@@ -5,23 +5,6 @@ enum MIDIMessageKind: String, Codable, CaseIterable, Sendable {
     case controlChange
     case programChange
     case pitchBend
-
-    var isContinuous: Bool {
-        self == .controlChange || self == .pitchBend
-    }
-
-    var badgeText: String {
-        switch self {
-        case .note:
-            return "NOTE"
-        case .controlChange:
-            return "CC"
-        case .programChange:
-            return "PROGRAM"
-        case .pitchBend:
-            return "PITCH"
-        }
-    }
 }
 
 struct MIDIMessage: Equatable, Sendable {
@@ -147,7 +130,7 @@ enum BridgeActionKind: String, Codable, CaseIterable, Identifiable, Sendable {
     var helpText: String {
         switch self {
         case .focusCodex:
-            return "Brings the Codex desktop app forward."
+            return "Brings the ChatGPT / Codex app forward."
         case .newTask:
             return "Sends ⌘N after focusing Codex."
         case .confirm:
@@ -161,7 +144,7 @@ enum BridgeActionKind: String, Codable, CaseIterable, Identifiable, Sendable {
         case .showShortcuts:
             return "Sends ⌘/ to open Codex's shortcut reference."
         case .dictation:
-            return "Toggles Codex dictation with the Double Command shortcut."
+            return "Sends the Codex Double Command dictation shortcut."
         case .composerDial:
             return "A knob sends Tab clockwise and Shift-Tab counterclockwise."
         case .historyDial:
@@ -206,24 +189,6 @@ struct ControlMapping: Codable, Identifiable, Equatable, Sendable {
         self.customShortcut = customShortcut
         self.enabled = enabled
     }
-
-    var expectsContinuousInput: Bool {
-        action.isDirectional || label.localizedCaseInsensitiveContains("knob")
-    }
-
-    var compatibilityIssue: String? {
-        guard let trigger else {
-            return nil
-        }
-        if expectsContinuousInput && !trigger.kind.isContinuous {
-            return "Expected CC input. Turn a knob instead of pressing a key."
-        }
-        return nil
-    }
-
-    var shortLabel: String {
-        label.replacingOccurrences(of: " · ", with: "\n")
-    }
 }
 
 struct BridgeConfiguration: Codable, Equatable, Sendable {
@@ -233,7 +198,7 @@ struct BridgeConfiguration: Codable, Equatable, Sendable {
 
     static var defaultConfiguration: BridgeConfiguration {
         BridgeConfiguration(
-            version: 2,
+            version: 1,
             preferredSourceID: nil,
             mappings: [
                 ControlMapping(label: "Pad 1", action: .focusCodex),
@@ -244,11 +209,11 @@ struct BridgeConfiguration: Codable, Equatable, Sendable {
                 ControlMapping(label: "Pad 6", action: .historyForward),
                 ControlMapping(label: "Pad 7", action: .showShortcuts),
                 ControlMapping(label: "Pad 8", action: .dictation),
-                ControlMapping(label: "Knob 1 · Filter", action: .composerDial),
-                ControlMapping(label: "Knob 2 · Resonance", action: .historyDial),
-                ControlMapping(label: "Knob 3 · Reverb", action: .arrowDial),
+                ControlMapping(label: "Knob 1", action: .composerDial),
+                ControlMapping(label: "Knob 2", action: .historyDial),
+                ControlMapping(label: "Knob 3", action: .arrowDial),
                 ControlMapping(
-                    label: "Knob 4 · Chorus",
+                    label: "Knob 4",
                     action: .customShortcut,
                     customShortcut: "cmd+shift+p"
                 )

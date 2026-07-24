@@ -17,19 +17,15 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0.0</string>
+    <string>0.1.0</string>
     <key>CFBundleVersion</key>
-    <string>100</string>
-    <key>CFBundleIconFile</key>
-    <string>AppIcon</string>
-    <key>LSApplicationCategoryType</key>
-    <string>public.app-category.utilities</string>
+    <string>1</string>
     <key>LSMinimumSystemVersion</key>
     <string>13.0</string>
     <key>NSHighResolutionCapable</key>
     <true/>
     <key>NSHumanReadableCopyright</key>
-    <string>Copyright © 2026 Kalani Andre Gomez. MIT License.</string>
+    <string>Built locally for Kalani.</string>
     <key>NSSupportsAutomaticGraphicsSwitching</key>
     <true/>
 </dict>

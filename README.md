@@ -5,7 +5,7 @@ desktop app. Pads can open a task, confirm, cancel, navigate history, show
 shortcuts, and toggle dictation. The four assignable knobs can become
 directional controls.
 
-![MPK Codex Bridge Reel View](docs/media/reel-view-screenshot.png)
+![MPK Codex Bridge classic interface](docs/media/app-screenshot.png)
 
 ## Download
 
@@ -18,6 +18,14 @@ Apple silicon and Intel build.
 This independent open-source utility is not affiliated with or endorsed by
 OpenAI or Akai Professional.
 
+## Classic release
+
+The latest download restores the original lightweight interface and original
+mapping engine used by the first working prototype. The runtime source,
+860 × 720 window, configuration schema, MIDI learning, and directional-knob
+behavior match that pre-upgrade build. The release packaging remains universal
+for Apple silicon and Intel.
+
 ## Three-minute setup
 
 1. Download and unzip the app, then drag **MPK Codex Bridge** to Applications.
@@ -29,10 +37,8 @@ OpenAI or Akai Professional.
 6. Turn **Internal Sounds off** on the MPK before learning the four knobs. Choose
    **Learn**, then turn exactly one knob.
 
-See [the illustrated install notes](docs/INSTALL.md) if macOS blocks the first
-launch or a knob does not register.
-
-![MPK Codex Bridge setup and mappings](docs/media/app-screenshot.png)
+See [the install notes](docs/INSTALL.md) if macOS blocks the first launch or a
+control does not register.
 
 ## Why the knobs sometimes appear broken
 
@@ -42,8 +48,8 @@ an assignable MIDI CC message. Use the four knobs labeled **Filter**,
 
 With **Internal Sounds on**, those controls can affect the built-in synth
 instead of reaching the Mac as the continuous MIDI messages this app needs.
-Turn Internal Sounds off, then relearn each knob. Version 1.0 detects and clears
-the common mistake where a piano note was learned into a knob slot.
+Turn Internal Sounds off, choose **Learn**, and move the intended knob before
+touching any key or pad.
 
 ## Starter layout
 
@@ -59,10 +65,10 @@ Nothing fires until you teach each row its physical MIDI control.
 | Pad 6 | Go forward (`⌘]`) |
 | Pad 7 | Open Codex shortcuts (`⌘/`) |
 | Pad 8 | Codex voice dictation (Double Command) |
-| Filter | Composer navigation (`Tab` / `Shift-Tab`) |
-| Resonance | History (`⌘[` / `⌘]`) |
-| Reverb | Left / right arrows |
-| Chorus | Custom shortcut |
+| Knob 1 | Composer navigation (`Tab` / `Shift-Tab`) |
+| Knob 2 | History (`⌘[` / `⌘]`) |
+| Knob 3 | Left / right arrows |
+| Knob 4 | Custom shortcut |
 
 The custom shortcut parser supports `cmd`, `shift`, `option`/`alt`, `control`,
 letters, digits, arrows, Return, Escape, Tab, Space, brackets, slash, and common
@@ -91,7 +97,7 @@ open "dist/MPK Codex Bridge.app"
 
 The dependency-free test runner covers MIDI parsing across packet boundaries,
 button debouncing, knob direction, channel matching, shortcut parsing,
-configuration round-tripping, and legacy knob-mapping migration.
+and configuration round-tripping.
 
 ## Scope
 
