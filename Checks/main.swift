@@ -158,11 +158,6 @@ do {
     let decoded = try JSONDecoder().decode(BridgeConfiguration.self, from: data)
     expect(decoded == expected, "configuration round trip")
     expect(decoded.mappings.count == 12, "starter mapping count")
-    expect(decoded.version == 2, "configuration schema v2")
-    expect(
-        decoded.mappings[8].label == "Knob 1 · Filter",
-        "knob labels match MPK Mini Play"
-    )
 }
 
 do {
@@ -179,55 +174,6 @@ do {
     expect(
         KeyboardShortcut.parse("hyper+banana") == nil,
         "invalid shortcut rejected"
-    )
-}
-
-do {
-    let invalidKnobMapping = ControlMapping(
-        label: "Knob 1 · Filter",
-        trigger: MIDITrigger(kind: .note, channel: 0, number: 60),
-        action: .composerDial
-    )
-    expect(
-        invalidKnobMapping.compatibilityIssue != nil,
-        "knob warns when a piano note was learned"
-    )
-
-    var engine = MappingEngine()
-    let keyPress = MIDIMessage(
-        kind: .note,
-        channel: 0,
-        number: 60,
-        value: 100,
-        phase: .began
-    )
-    expect(
-        engine.activations(
-            for: keyPress,
-            mappings: [invalidKnobMapping]
-        ).isEmpty,
-        "directional actions ignore note input"
-    )
-}
-
-do {
-    var legacy = BridgeConfiguration.defaultConfiguration
-    legacy.version = 1
-    legacy.mappings[8].label = "Knob 1"
-    legacy.mappings[8].trigger = MIDITrigger(
-        kind: .note,
-        channel: 0,
-        number: 60
-    )
-    let temporaryURL = FileManager.default.temporaryDirectory
-        .appendingPathComponent("mpk-codex-check-\(UUID().uuidString).json")
-    try JSONEncoder().encode(legacy).write(to: temporaryURL)
-
-    let migrated = ConfigurationStore(fileURL: temporaryURL).load()
-    expect(migrated.version == 2, "legacy configuration migrates")
-    expect(
-        migrated.mappings[8].trigger == nil,
-        "legacy invalid knob trigger is cleared"
     )
 }
 

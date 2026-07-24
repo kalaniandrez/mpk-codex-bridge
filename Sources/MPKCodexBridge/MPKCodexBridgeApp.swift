@@ -9,7 +9,7 @@ struct MPKCodexBridgeApp: App {
             ContentView(model: model)
         }
         .windowStyle(.titleBar)
-        .defaultSize(width: 980, height: 800)
+        .defaultSize(width: 860, height: 720)
 
         MenuBarExtra {
             Text(model.selectedSourceName)

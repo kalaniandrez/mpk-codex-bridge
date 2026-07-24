@@ -25,7 +25,7 @@ holding the device, then relaunch the bridge.
 
 Choose **Allow Accessibility**, then enable **MPK Codex Bridge** under **System
 Settings > Privacy & Security > Accessibility**. Return to the app and confirm
-the setup step changes to **Accessibility allowed**.
+the Accessibility row says it is ready to send shortcuts.
 
 This permission only lets the bridge send the keyboard shortcuts you map.
 
@@ -42,11 +42,11 @@ The separate Volume knob is hardware-only and cannot be learned.
 
 1. Turn **Internal Sounds off** on the keyboard.
 2. Choose **Learn** beside one knob.
-3. Turn that knob through several positions.
+3. Turn that knob through several positions before touching any key or pad.
 4. Confirm the learned trigger says `CC`, not `Note`.
 
-If the app says it heard a piano note, cancel learning, turn Internal Sounds
-off, and try the assignable knob again.
+If the row learns a `Note`, choose **Learn** again and immediately move the
+assignable knob.
 
 ## First-launch limitations
 

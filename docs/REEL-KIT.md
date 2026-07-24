@@ -12,14 +12,14 @@ in the lower third and the Mac screen readable above it.
 | Time | Picture | Voiceover / on-screen text |
 | --- | --- | --- |
 | 0:00-0:03 | Tight shot: hand hits a pad, Codex jumps forward | “I turned my Akai keyboard into a controller for Codex.” |
-| 0:03-0:07 | Screen recording of Reel View reacting to two pads | “Each pad can open a task, confirm, cancel, or start dictation.” |
-| 0:07-0:11 | Turn Filter and Resonance while the matching tiles flash | “And the synth knobs now navigate the app.” |
+| 0:03-0:07 | Show Last MIDI changing while two pads control Codex | “Each pad can open a task, confirm, cancel, or start dictation.” |
+| 0:07-0:11 | Turn two knobs, then show their mapped actions | “And the synth knobs now navigate the app.” |
 | 0:11-0:15 | Show the Learn button and one fast mapping | “It learns your MIDI controls locally, with no API key.” |
 | 0:15-0:19 | Split shot: MPK plus a real Codex action | “I made the Mac app open source.” |
 | 0:19-0:23 | Cover card | “Comment MIDI and I’ll send you the download.” |
 
-Use the app's **Reel view** for the screen shots. It enlarges the live MIDI
-message, latest Codex action, and active-control highlights.
+Keep the classic app open beside Codex. Frame the **Last MIDI** and **Last
+action** card when demonstrating input, then scroll to the mapped controls.
 
 ## On-screen caption stack
 

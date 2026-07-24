@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.1 - 2026-07-24
+
+- Restored the exact pre-upgrade Swift runtime recovered from the original
+  working task record.
+- Restored the original compact mapping-list interface and 860 × 720 window.
+- Restored configuration schema v1 and the original MIDI learning and
+  directional-knob behavior.
+- Restored Kalani's previously working pad mappings on channel 10 and knob CC
+  mappings on channel 1 in the local configuration.
+- Kept the universal Apple silicon and Intel release packaging.
+- Made release checks compile from a stable local staging copy to avoid iCloud
+  source-timestamp races.
+
 ## 1.0.0 - 2026-07-23
 
 - Added guided MIDI, Accessibility, and control-learning setup.

@@ -205,7 +205,10 @@ struct MappingEngine {
             }
             return message.value > previousValue ? .positive : .negative
         case .note, .programChange:
-            return nil
+            guard message.phase == .began else {
+                return nil
+            }
+            return .positive
         }
     }
 }
