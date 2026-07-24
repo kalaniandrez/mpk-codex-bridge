@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.2 - 2026-07-24
+
+- Added a dual-version download containing Classic and Modern / Reel View.
+- Added separate direct-download archives for each version.
+- Restored the custom app-icon reference and gave Classic a distinct macOS
+  identity so Finder and the Dock do not confuse it with Modern.
+- Added a choose-one guide explaining that only one version should run at a
+  time.
+- Added signature, icon-resource, archive, and checksum validation for both
+  applications.
+
 ## 1.0.1 - 2026-07-24
 
 - Restored the exact pre-upgrade Swift runtime recovered from the original
