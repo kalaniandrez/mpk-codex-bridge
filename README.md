@@ -9,7 +9,20 @@ directional controls.
 
 ## Download
 
-[Download MPK Codex Bridge for macOS](https://github.com/kalaniandrez/mpk-codex-bridge/releases/latest/download/MPK-Codex-Bridge-macOS.zip)
+[Download both versions for macOS](https://github.com/kalaniandrez/mpk-codex-bridge/releases/latest/download/MPK-Codex-Bridge-macOS.zip)
+
+The main ZIP includes:
+
+- **Classic**, the original compact and currently recommended version.
+- **Modern / Reel View**, the polished visual version from v1.0.0.
+
+Install and run only one at a time because both versions share the same local
+mapping file and listen for the same MIDI controls.
+
+Direct downloads:
+
+- [Classic only](https://github.com/kalaniandrez/mpk-codex-bridge/releases/latest/download/MPK-Codex-Bridge-Classic-macOS.zip)
+- [Modern / Reel View only](https://github.com/kalaniandrez/mpk-codex-bridge/releases/latest/download/MPK-Codex-Bridge-Modern-macOS.zip)
 
 Requires macOS 13 or newer and the
 [Codex desktop app](https://openai.com/codex/). The release is a universal
@@ -24,7 +37,8 @@ The latest download restores the original lightweight interface and original
 mapping engine used by the first working prototype. The runtime source,
 860 × 720 window, configuration schema, MIDI learning, and directional-knob
 behavior match that pre-upgrade build. The release packaging remains universal
-for Apple silicon and Intel.
+for Apple silicon and Intel. The Classic bundle now includes the visible custom
+keyboard-and-knobs app icon.
 
 ## Three-minute setup
 

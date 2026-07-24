@@ -46,14 +46,15 @@ visible.
 
 Keyword: `MIDI`
 
-Public download:
+Public dual-version download:
 
 `https://github.com/kalaniandrez/mpk-codex-bridge/releases/latest/download/MPK-Codex-Bridge-macOS.zip`
 
 ### First automated reply
 
 > Here it is 🎹 MPK Codex Bridge turns your MIDI pads and knobs into shortcuts
-> for the Codex Mac app. Download it here:
+> for the Codex Mac app. The download includes the reliable Classic version
+> and the visual Reel View version:
 > {{download_link}}
 >
 > macOS 13+ · local-only · no API key. On first launch, Control-click the app
